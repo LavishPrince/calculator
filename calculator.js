@@ -107,9 +107,20 @@ function handleSymbols(s) {
   }
 }
 
+function displayUpdate() {
+  const display = document.querySelector(".display");
+  const result = document.querySelector(".result");
+  if (previousNumber !== "" && currentOperator !== undefined)
+    display.textContent = `${previousNumber} ${currentOperator}`;
+  else display.textContent = "";
+  result.textContent = `${currentNumber}`;
+}
+
 function handleButtonClick(element) {
+  displayUpdate();
   if (isNaN(parseInt(element.textContent))) handleSymbols(element.textContent);
   else handleNumbers(element.textContent);
+  displayUpdate();
 }
 
 const userInput = document.querySelector(".input");
