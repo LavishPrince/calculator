@@ -49,65 +49,64 @@ function handleNumbers(n) {
   currentNumber += n;
   console.log(currentNumber);
 }
+
+function handleCalculation(s) {
+  previousNumber =
+    Math.round(
+      operate(
+        currentOperator,
+        parseFloat(previousNumber),
+        parseFloat(currentNumber),
+      ) * 100,
+    ) / 100;
+  previousNumber = previousNumber.toString();
+  if (s === "=") {
+    console.info(previousNumber);
+    currentNumber = previousNumber;
+    previousNumber = "";
+    currentOperator = undefined;
+    console.info(typeof currentNumber);
+    return;
+  }
+  currentOperator = s;
+  currentNumber = "";
+  console.info(previousNumber);
+}
+
+function handleDivideByZero() {
+  document.querySelector(".display").textContent = "";
+  document.querySelector(".result").textContent = "you cannot divide by 0";
+  calculatorPause = true;
+  currentNumber = "";
+  previousNumber = "";
+  currentOperator = undefined;
+}
+
 function handleSymbols(s) {
   if (s === "C") {
     currentOperator = undefined;
     currentNumber = "";
     previousNumber = "";
-    return;
-  }
-  if (s === "⌫") {
+  } else if (s === "⌫") {
     console.log(typeof currentNumber);
     if (currentNumber !== "")
       currentNumber = currentNumber.slice(0, currentNumber.length - 1);
     console.log(currentNumber);
-    return;
-  }
-  if (s === "±") {
+  } else if (s === "±") {
     if (currentNumber !== "") currentNumber = operate(s).toString();
     console.log(currentNumber);
-    return;
-  }
-  if (s === ".") {
+  } else if (s === ".") {
     if (!currentNumber.includes(s)) currentNumber += s;
     else if (currentNumber === "") currentNumber = "0" + s;
     console.log(currentNumber);
-    return;
-  }
-  if (parseInt(currentNumber) === 0 && currentOperator === "÷") {
-    document.querySelector(".display").textContent = "";
-    document.querySelector(".result").textContent = "you cannot divide by 0";
-    calculatorPause = true;
-    currentNumber = "";
-    previousNumber = "";
-    currentOperator = undefined;
-    return;
-  }
-  if (
+  } else if (parseInt(currentNumber) === 0 && currentOperator === "÷") {
+    handleDivideByZero();
+  } else if (
     currentNumber !== "" &&
     previousNumber !== "" &&
     currentNumber[currentNumber.length - 1] !== "."
   ) {
-    previousNumber =
-      Math.round(
-        operate(
-          currentOperator,
-          parseFloat(previousNumber),
-          parseFloat(currentNumber),
-        ) * 100,
-      ) / 100;
-    previousNumber = previousNumber.toString();
-    if (s === "=") {
-      console.info(previousNumber);
-      currentNumber = previousNumber;
-      previousNumber = "";
-      currentOperator = undefined;
-      console.info(typeof currentNumber);
-      return;
-    }
-    currentOperator = s;
-    currentNumber = "";
-    console.info(previousNumber);
+    handleCalculation(s);
   } else if (currentNumber !== "" && s !== "=") {
     previousNumber = currentNumber;
     currentOperator = s;
@@ -141,6 +140,7 @@ let currentNumber = "";
 let currentOperator = undefined;
 let previousNumber = "";
 let calculatorPause = false;
+
 userInput.addEventListener("click", (event) => {
   handleButtonClick(event.target);
 });
