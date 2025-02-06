@@ -22,6 +22,34 @@ function changeSign(n) {
   return -1 * n;
 }
 
+function operate(operator, a, b) {
+  switch (operator) {
+    case "+": {
+      add(a, b);
+      break;
+    }
+    case "-": {
+      subtract(a, b);
+      break;
+    }
+    case "×": {
+      multiply(a, b);
+      break;
+    }
+    case "÷": {
+      divide(a, b);
+      break;
+    }
+    case "%": {
+      reminder(a, b);
+      break;
+    }
+    case "±": {
+      changeSign(parseInt(currentNumber));
+    }
+  }
+}
+
 function handleNumbers(n) {
   currentNumber += n;
   console.log(currentNumber);
