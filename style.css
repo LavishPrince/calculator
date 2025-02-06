@@ -4,6 +4,8 @@
   --output-background: #00abe5;
   --output-color: white;
   --operand-background: #dcf5fe;
+  --clear-background: #97fdd3;
+  --equal-background: #95e2fe;
 }
 * {
   box-sizing: border-box;
@@ -51,4 +53,12 @@ button {
 
 .operand {
   background-color: var(--operand-background);
+}
+
+.clear {
+  background-color: var(--clear-background);
+}
+
+.equals {
+  background-color: var(--equal-background);
 }
