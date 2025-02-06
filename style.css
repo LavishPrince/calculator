@@ -1,6 +1,8 @@
 :root {
   --button-color: #37859e;
   --button-size: 3.5rem;
+  --output-background: #00abe5;
+  --output-color: white;
 }
 * {
   box-sizing: border-box;
@@ -25,4 +27,17 @@ button {
   color: var(--button-color);
   width: var(--button-size);
   height: var(--button-size);
+}
+
+.output {
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--output-background);
+  color: var(--output-color);
+}
+
+.result,
+.display {
+  flex: 1 1 auto;
 }
