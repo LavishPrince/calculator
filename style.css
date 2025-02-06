@@ -53,6 +53,9 @@ button {
 .result,
 .display {
   flex: 1 1 auto;
+  text-align: right;
+  padding: 10%;
+  font-size: 2rem;
 }
 
 .operand {
