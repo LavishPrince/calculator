@@ -46,8 +46,11 @@ function operate(operator, a, b) {
 }
 
 function handleNumbers(n) {
+  if (parseInt(currentNumber) === 0) {
+    currentNumber = n;
+    return;
+  }
   currentNumber += n;
-  console.log(currentNumber);
 }
 
 function handleCalculation(s) {
@@ -61,16 +64,13 @@ function handleCalculation(s) {
     ) / 100;
   previousNumber = previousNumber.toString();
   if (s === "=") {
-    console.info(previousNumber);
     currentNumber = previousNumber;
     previousNumber = "";
     currentOperator = undefined;
-    console.info(typeof currentNumber);
     return;
   }
   currentOperator = s;
   currentNumber = "";
-  console.info(previousNumber);
 }
 
 function handleDivideByZero() {
@@ -88,17 +88,13 @@ function handleSymbols(s) {
     currentNumber = "";
     previousNumber = "";
   } else if (s === "⌫") {
-    console.log(typeof currentNumber);
     if (currentNumber !== "")
       currentNumber = currentNumber.slice(0, currentNumber.length - 1);
-    console.log(currentNumber);
   } else if (s === "±") {
     if (currentNumber !== "") currentNumber = operate(s).toString();
-    console.log(currentNumber);
   } else if (s === ".") {
     if (!currentNumber.includes(s)) currentNumber += s;
     else if (currentNumber === "") currentNumber = "0" + s;
-    console.log(currentNumber);
   } else if (parseInt(currentNumber) === 0 && currentOperator === "÷") {
     handleDivideByZero();
   } else if (
@@ -111,7 +107,6 @@ function handleSymbols(s) {
     previousNumber = currentNumber;
     currentOperator = s;
     currentNumber = "";
-    console.info(previousNumber);
   }
 }
 
