@@ -74,6 +74,15 @@ function handleSymbols(s) {
     console.log(currentNumber);
     return;
   }
+  if (parseInt(currentNumber) === 0 && currentOperator === "÷") {
+    document.querySelector(".display").textContent = "";
+    document.querySelector(".result").textContent = "you cannot divide by 0";
+    calculatorPause = true;
+    currentNumber = "";
+    previousNumber = "";
+    currentOperator = undefined;
+    return;
+  }
   if (
     currentNumber !== "" &&
     previousNumber !== "" &&
@@ -110,6 +119,10 @@ function handleSymbols(s) {
 function displayUpdate() {
   const display = document.querySelector(".display");
   const result = document.querySelector(".result");
+  if (calculatorPause) {
+    calculatorPause = false;
+    return;
+  }
   if (previousNumber !== "" && currentOperator !== undefined)
     display.textContent = `${previousNumber} ${currentOperator}`;
   else display.textContent = "";
@@ -127,7 +140,7 @@ const userInput = document.querySelector(".input");
 let currentNumber = "";
 let currentOperator = undefined;
 let previousNumber = "";
-
+let calculatorPause = false;
 userInput.addEventListener("click", (event) => {
   handleButtonClick(event.target);
 });
