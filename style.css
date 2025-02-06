@@ -1,6 +1,6 @@
 :root {
   --button-color: #37859e;
-  --button-size: 4rem;
+  --button-size: 5rem;
   --output-background: #00abe5;
   --output-color: white;
   --operand-background: #dcf5fe;
@@ -36,7 +36,7 @@ button {
 }
 
 .output {
-  height: 9rem;
+  height: 11rem;
   display: flex;
   flex-direction: column;
   background: var(--output-background);
