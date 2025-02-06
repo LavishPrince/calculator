@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  return Math.round(a / b);
+  return Math.round((a / b) * 100) / 100;
 }
 
 function reminder(a, b) {
@@ -25,27 +25,22 @@ function changeSign(n) {
 function operate(operator, a, b) {
   switch (operator) {
     case "+": {
-      add(a, b);
-      break;
+      return add(a, b);
     }
     case "-": {
-      subtract(a, b);
-      break;
+      return subtract(a, b);
     }
     case "×": {
-      multiply(a, b);
-      break;
+      return multiply(a, b);
     }
     case "÷": {
-      divide(a, b);
-      break;
+      return divide(a, b);
     }
     case "%": {
-      reminder(a, b);
-      break;
+      return reminder(a, b);
     }
     case "±": {
-      changeSign(parseInt(currentNumber));
+      return changeSign(parseInt(currentNumber));
     }
   }
 }
@@ -55,8 +50,61 @@ function handleNumbers(n) {
   console.log(currentNumber);
 }
 function handleSymbols(s) {
-  currentOperator = s;
-  console.log(currentOperator);
+  if (s === "C") {
+    currentOperator = undefined;
+    currentNumber = "";
+    previousNumber = "";
+    return;
+  }
+  if (s === "⌫") {
+    console.log(typeof currentNumber);
+    if (currentNumber !== "")
+      currentNumber = currentNumber.slice(0, currentNumber.length - 1);
+    console.log(currentNumber);
+    return;
+  }
+  if (s === "±") {
+    if (currentNumber !== "") currentNumber = operate(s).toString();
+    console.log(currentNumber);
+    return;
+  }
+  if (s === ".") {
+    if (!currentNumber.includes(s)) currentNumber += s;
+    else if (currentNumber === "") currentNumber = "0" + s;
+    console.log(currentNumber);
+    return;
+  }
+  if (
+    currentNumber !== "" &&
+    previousNumber !== "" &&
+    currentNumber[currentNumber.length - 1] !== "."
+  ) {
+    previousNumber =
+      Math.round(
+        operate(
+          currentOperator,
+          parseFloat(previousNumber),
+          parseFloat(currentNumber),
+        ) * 100,
+      ) / 100;
+    previousNumber = previousNumber.toString();
+    if (s === "=") {
+      console.info(previousNumber);
+      currentNumber = previousNumber;
+      previousNumber = "";
+      currentOperator = undefined;
+      console.info(typeof currentNumber);
+      return;
+    }
+    currentOperator = s;
+    currentNumber = "";
+    console.info(previousNumber);
+  } else if (currentNumber !== "" && s !== "=") {
+    previousNumber = currentNumber;
+    currentOperator = s;
+    currentNumber = "";
+    console.info(previousNumber);
+  }
 }
 
 function handleButtonClick(element) {
