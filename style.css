@@ -1,8 +1,9 @@
 :root {
   --button-color: #37859e;
-  --button-size: 3.5rem;
+  --button-size: 4rem;
   --output-background: #00abe5;
   --output-color: white;
+  --operand-background: #dcf5fe;
 }
 * {
   box-sizing: border-box;
@@ -27,17 +28,27 @@ button {
   color: var(--button-color);
   width: var(--button-size);
   height: var(--button-size);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .output {
-  height: 8rem;
+  height: 9rem;
   display: flex;
   flex-direction: column;
   background: var(--output-background);
   color: var(--output-color);
 }
 
+.row {
+  display: flex;
+}
 .result,
 .display {
   flex: 1 1 auto;
+}
+
+.operand {
+  background-color: var(--operand-background);
 }
