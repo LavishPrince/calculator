@@ -22,8 +22,12 @@ function changeSign(n) {
   return -1 * n;
 }
 
+function handleButtonClick(element) {
+  console.log(element.textContent);
+}
+
 const userInput = document.querySelector(".input");
 
 userInput.addEventListener("click", (event) => {
-  alert(event.target.textContent);
+  handleButtonClick(event.target);
 });
