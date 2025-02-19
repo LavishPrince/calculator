@@ -95,7 +95,10 @@ function handleSymbols(s) {
   } else if (s === ".") {
     if (!currentNumber.includes(s)) currentNumber += s;
     else if (currentNumber === "") currentNumber = "0" + s;
-  } else if (parseInt(currentNumber) === 0 && currentOperator === "÷") {
+  } else if (
+    parseInt(currentNumber) === 0 &&
+    (currentOperator === "÷" || currentOperator === "%")
+  ) {
     handleDivideByZero();
   } else if (
     currentNumber !== "" &&
