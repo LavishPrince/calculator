@@ -87,11 +87,10 @@ function handleSymbols(s) {
     currentOperator = undefined;
     currentNumber = "";
     previousNumber = "";
-  } else if (s === "⌫") {
-    if (currentNumber !== "")
-      currentNumber = currentNumber.slice(0, currentNumber.length - 1);
-  } else if (s === "±") {
-    if (currentNumber !== "") currentNumber = operate(s).toString();
+  } else if (s === "⌫" && currentNumber !== "") {
+    currentNumber = currentNumber.slice(0, currentNumber.length - 1);
+  } else if (s === "±" && currentNumber !== "") {
+    currentNumber = operate(s).toString();
   } else if (s === ".") {
     if (!currentNumber.includes(s)) currentNumber += s;
     else if (currentNumber === "") currentNumber = "0" + s;
@@ -100,7 +99,7 @@ function handleSymbols(s) {
   } else if (
     currentNumber !== "" &&
     previousNumber !== "" &&
-    currentNumber[currentNumber.length - 1] !== "."
+    currentNumber.endsWith(".")
   ) {
     handleCalculation(s);
   } else if (currentNumber !== "" && s !== "=") {
@@ -132,7 +131,7 @@ function handleButtonClick(element) {
 
 const userInput = document.querySelector(".input");
 let currentNumber = "";
-let currentOperator = undefined;
+let currentOperator;
 let previousNumber = "";
 let calculatorPause = false;
 
