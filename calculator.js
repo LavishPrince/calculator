@@ -99,6 +99,7 @@ function handleSymbols(s) {
   } else if (
     currentNumber !== "" &&
     previousNumber !== "" &&
+
     currentNumber.endsWith(".")
   ) {
     handleCalculation(s);
@@ -132,6 +133,7 @@ function handleButtonClick(element) {
 const userInput = document.querySelector(".input");
 let currentNumber = "";
 let currentOperator;
+
 let previousNumber = "";
 let calculatorPause = false;
 
