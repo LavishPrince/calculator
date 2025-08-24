@@ -99,8 +99,7 @@ function handleSymbols(s) {
   } else if (
     currentNumber !== "" &&
     previousNumber !== "" &&
-
-    currentNumber.endsWith(".")
+    (currentNumber.endsWith(".") || s == "=")
   ) {
     handleCalculation(s);
   } else if (currentNumber !== "" && s !== "=") {
